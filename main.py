@@ -19,12 +19,12 @@ def draw_grid():
         t.goto(i,0)
         t.pd()
         t.goto(i,3)
-        # Linhas Horizontais
-        for i in range(1,3):
-            t.pu()
-            t.goto(0,i)
-            t.pd()
-            t.goto(3,i)
+    # Linhas Horizontais
+    for i in range(1,3):
+        t.pu()
+        t.goto(0,i)
+        t.pd()
+        t.goto(3,i)
 draw_grid()
 
 # Lógica do jogo
@@ -67,7 +67,7 @@ def click(x,y):
         board[row][col] = turn
         if turn == 'X':
             draw_x(col,row)
-            turn = '0'
+            turn = 'O'
         else:
             draw_o(col,row)
             turn = 'X'
@@ -80,7 +80,5 @@ def click(x,y):
             game_over = True
 
 
-
 screen.onscreenclick(click)
 turtle.mainloop()
-
