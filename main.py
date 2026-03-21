@@ -36,7 +36,7 @@ def draw_x(x,y):
     t.goto(x+0.2, y+0.2)
     t.pd()
     t.goto(x+0.8, y+0.8)
-    t.pd()
+    t.pu()
     t.goto(x+0.2, y+0.8)
     t.pd()
     t.goto(x+0.8, y+0.2)
@@ -75,7 +75,7 @@ def click(x,y):
         if winner:
             print(f"Jogador {winner} venceu!")
             game_over = True
-        elif all(all(cell != '' for cell in row) for row in board):
+        elif all(all(cell != '' for cell in linha) for row in board):
             print("Empate!")
             game_over = True
 
