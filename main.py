@@ -5,7 +5,7 @@ screen = turtle.Screen()
 screen.title("Jogo da velha - Turtle")
 screen.setup(width=600, height=600)
 screen.setworldcoordinates(0,0,3,3) 
-
+#Olha 
 # Desenhar Tabuleiro
 t= turtle.Turtle()
 t.speed(0)
