@@ -5,7 +5,7 @@ screen = turtle.Screen()
 screen.title("Jogo da velha - Turtle")
 screen.setup(width=600, height=600)
 screen.setworldcoordinates(0,0,3,3) 
-
+#Olha 
 # Desenhar Tabuleiro
 t= turtle.Turtle()
 t.speed(0)
@@ -19,12 +19,12 @@ def draw_grid():
         t.goto(i,0)
         t.pd()
         t.goto(i,3)
-        # Linhas Horizontais
-        for i in range(1,3):
-            t.pu()
-            t.goto(0,i)
-            t.pd()
-            t.goto(3,i)
+    # Linhas Horizontais
+    for i in range(1,3):
+        t.pu()
+        t.goto(0,i)
+        t.pd()
+        t.goto(3,i)
 draw_grid()
 
 # Lógica do jogo
@@ -36,7 +36,7 @@ def draw_x(x,y):
     t.goto(x+0.2, y+0.2)
     t.pd()
     t.goto(x+0.8, y+0.8)
-    t.pd()
+    t.pu()
     t.goto(x+0.2, y+0.8)
     t.pd()
     t.goto(x+0.8, y+0.2)
@@ -67,7 +67,7 @@ def click(x,y):
         board[row][col] = turn
         if turn == 'X':
             draw_x(col,row)
-            turn = '0'
+            turn = 'O'
         else:
             draw_o(col,row)
             turn = 'X'
@@ -75,12 +75,10 @@ def click(x,y):
         if winner:
             print(f"Jogador {winner} venceu!")
             game_over = True
-        elif all(all(cell != '' for cell in row) for row in board):
+        elif all(all(cell != '' for cell in linha) for row in board):
             print("Empate!")
             game_over = True
 
 
-
 screen.onscreenclick(click)
 turtle.mainloop()
-
