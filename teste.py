@@ -1,37 +1,29 @@
-import math
+from pygame import *
+import sys
 
-def volume_cilindro(raio, altura):
-    """Calcula o volume de um cilindro: V = pi * r^2 * h"""
-    return math.pi * (raio ** 2) * altura
+init()
 
-def obter_espessura(tipo_revestimento):
-    """Retorna a espessura com base no tipo de revestimento"""
-    if tipo_revestimento == 'epoxi':
-        return 0.003
-    elif tipo_revestimento == 'fibra_vidro':
-        return 0.005
-    elif tipo_revestimento == 'azulejo':
-        return 0.007
-    else:
-        return 0.0
+window = display.set_mode((1280, 720))
 
-def volume_util(raio, altura, tipo_revestimento):
-    # Obtém a espessura usando a função auxiliar
-    e = obter_espessura(tipo_revestimento)
+window.fill((25,25,112))
+
+
+
+while True:
+    for ev in event.get():
+        if ev.type == QUIT:
+            quit()
+            sys.exit()
+
+    # Casa
+    draw.rect(window, (0,0,0),(0,600,1280,120)) # Chão
+    draw.rect(window, (128,128,128),(1000,300,50,300) ) # Poste Luz
+    draw.rect(window, (255,250,250),(200,300,300,300)) # Casa em si
+    draw.rect(window, (165,42,42), (350,450,100,150)) # Porta
+    draw.rect(window, (0,0,0), (230,399,70,90)) # Janela
+    draw.line(window, (229,228,226), (265, 400), (265,489), 2) # Grade janela 1 
+    draw.line(window, (229,228,226), (300, 450), (230,450), 2) # Grade janela 2
     
-    # Calcula as dimensões úteis (internas)
-    # O raio útil é o raio original menos a espessura da parede
-    # A altura útil é a altura original menos a espessura do fundo
-    raio_u = raio - e
-    altura_u = altura - e
     
-    # Garante que as dimensões não sejam negativas
-    if raio_u < 0 or altura_u < 0:
-        return 0.0
     
-    # Retorna o volume utilizando a função de cálculo de cilindro
-    return volume_cilindro(raio_u, altura_u)
-
-volume_cilindro(10,50)
-obter_espessura(0.003)
-volume_util(5,10,'epoxi')
+    display.update()
