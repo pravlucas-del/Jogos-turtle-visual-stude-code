@@ -25,14 +25,18 @@ window.fill((25,25,112))
 x_nuvem = 0
 x_nuvem2 = 900
 bg_color = ((135,206,235))
-
+texto = "Mundo da Magia"
 
 while running:
     clock.tick(60)
-
+    mouse_buttons = mouse.get_pressed()
+    # Ações Imediatas
     for ev in event.get():
         if ev.type == QUIT:
             running = False
+        if ev.type == MOUSEBUTTONDOWN:
+            ev.button == 1
+            texto = "Fairy Tail"
         if ev.type == KEYDOWN:
             key_pressed = ev.key
             if key_pressed == K_SPACE:
@@ -75,7 +79,7 @@ while running:
     window.blit(f_imgae,(300,210))
     window.blit(z_image,(600,400))
 
-    ft_text = fai_font.render("Mundo da Magia",True,(0,0,0))
+    ft_text = fai_font.render(texto ,True,(0,0,0))
     window.blit(ft_text,(290,340))
 
     # Nuvem
