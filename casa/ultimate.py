@@ -14,8 +14,12 @@ z_image = transform.scale(z_image,(100,201))
 
 fai_font = font.Font("CROWNT.TTF",25)
 
-mixer.music.load("musicaf.mp3")
-mixer.music.play(-1)
+# mixer.music.load("musicaf.mp3")
+# mixer.music.play(-1)
+sfx_manha = mixer.Sound("saria.mp3")
+sfx_tarde = mixer.Sound("sasori.mp3")
+sfx_noite = mixer.Sound("musicaf.mp3")
+
 
 
 window = display.set_mode((1280, 720))
@@ -25,11 +29,14 @@ window.fill((25,25,112))
 x_nuvem = 0
 x_nuvem2 = 900
 bg_color = ((135,206,235))
-texto = "Mundo da Magia"
+
+
+texto = "Mundo, da Magia"
 
 while running:
     clock.tick(60)
     mouse_buttons = mouse.get_pressed()
+    mouse_cursor = mouse.get_cursor()
     # Ações Imediatas
     for ev in event.get():
         if ev.type == QUIT:
@@ -37,16 +44,27 @@ while running:
         if ev.type == MOUSEBUTTONDOWN:
             ev.button == 1
             texto = "Fairy Tail"
+            sfx_manha.play()
+        
+            
         if ev.type == KEYDOWN:
             key_pressed = ev.key
             if key_pressed == K_SPACE:
+                bg_color = (244, 161, 110)
+                sfx_tarde.play()
+            elif key_pressed == K_1:
                 bg_color = (25,25,132)
-
+                sfx_noite.play()
     
-    # Update
+       
+        
+
+     # Update
     dt = clock.get_time()/1000
     keys = key.get_pressed()
     
+    x,y = mouse.get_pos()
+
     # Teclas para movimentação
     if keys[K_d]:
         x_nuvem = x_nuvem + 100 * dt
@@ -54,12 +72,18 @@ while running:
     elif keys[K_a]:   
         x_nuvem = x_nuvem - 100 * dt
         x_nuvem2 = x_nuvem2 - 100 * dt
+    elif keys[K_m]:
+        sfx_manha.play()
+    elif keys[K_t]:
+        sfx_tarde.play()
+    elif keys[K_n]:
+        sfx_noite.play()
 
     
     
     
 
-    # Draw
+    # Draw Manhã
     window.fill(bg_color) # Cor de fundo
     # Casa
     draw.rect(window, (0,0,0),(0,600,1280,120)) # Chão
@@ -72,7 +96,16 @@ while running:
     draw.line(window, (229,228,226), (265, 400), (265,489), 2) # Grade janela 1 
     draw.line(window, (229,228,226), (300, 450), (230,450), 2) # Grade janela 2
     draw.polygon(window,(242,136,59),((200,300),(350,200),(500,300))) # laje
-    draw.circle(window,(248,248,255),(700,60),50 )       
+    draw.circle(window,(255,242,81),(x,y),50 ) # Sol
+    draw.line(window, (255,242,81), (x, y + 40), (x,y + 90), 2) # Luz solar (Traço) baixo
+    draw.line(window, (255,242,81), (x, y - 50), (x,y - 90), 2) # Luz solar (Traço) cima 
+    draw.line(window, (255,242,81), (x + 40, y), (x + 90,y), 2) # Luz solar (Traço) direta
+    draw.line(window, (255,242,81), (x - 100, y), (x - 50,y), 2) # Luz solar (Traço) esquerda
+    draw.rect(window, (0,0,0),(0,600,1280,120)) # Chão
+    
+
+
+        
    
     # Desenhar Imagem (Tiradas da internet)
 
