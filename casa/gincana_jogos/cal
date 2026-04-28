@@ -1,0 +1,76 @@
+from pygame import *
+
+# Inicialização
+init()
+tela =display.set_mode((400, 300))
+display.set_caption("Calculadora Vagabunda 300XP")
+fonte = font.SysFont("Arial", 24)
+
+# Variáveis de estado
+memoria = 0.0
+input_texto = ""
+operador = ""
+etapa = "NUMERO_INICIAL" # NUMERO_INICIAL, OPERADOR, PROXIMO_NUMERO
+mensagem = "Digite o 1º número e Enter"
+
+def e_numero(texto):
+    # Validação manual sem try/except
+    temp = texto.replace('.', '', 1).replace('-', '', 1)
+    return temp.isdigit() and len(texto) > 0
+
+executando = True
+while executando:
+    tela.fill((30, 30, 30)) # Fundo escuro
+    
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            executando = False
+            
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_RETURN:
+                if etapa == "NUMERO_INICIAL":
+                    if e_numero(input_texto):
+                        memoria = float(input_texto)
+                        etapa = "OPERADOR"
+                        mensagem = "Digite o operador (+, -, *, /)"
+                        input_texto = ""
+                
+                elif etapa == "OPERADOR":
+                    if input_texto in ['+', '-', '*', '/']:
+                        operador = input_texto
+                        etapa = "PROXIMO_NUMERO"
+                        mensagem = f"{memoria} {operador} (digite o próximo)"
+                        input_texto = ""
+                
+                elif etapa == "PROXIMO_NUMERO":
+                    if e_numero(input_texto):
+                        num2 = float(input_texto)
+                        # Operações
+                        if operador == '+': memoria += num2
+                        elif operador == '-': memoria -= num2
+                        elif operador == '*': memoria *= num2
+                        elif operador == '/': 
+                            if num2 != 0: memoria /= num2
+                            else: mensagem = "Erro: Divisão por 0!"
+                        
+                        etapa = "OPERADOR"
+                        mensagem = f"Resultado: {memoria}. Próximo OP:"
+                        input_texto = ""
+            
+            elif evento.key == pygame.K_BACKSPACE:
+                input_texto = input_texto[:-1]
+            else:
+                input_texto += evento.unicode
+
+    # Renderização
+    txt_memoria = fonte.render(f"Memória: {memoria}", True, (0, 255, 0))
+    txt_instrucao = fonte.render(mensagem, True, (255, 255, 255))
+    txt_input = fonte.render(f"> {input_texto}", True, (255, 255, 0))
+    
+    tela.blit(txt_memoria, (20, 20))
+    tela.blit(txt_instrucao, (20, 70))
+    tela.blit(txt_input, (20, 120))
+    
+    pygame.display.flip()
+
+pygame.quit()
