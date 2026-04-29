@@ -1,7 +1,5 @@
 # Calculadora
 
-
-
 def calculadora_vagabunda():
     print("--- Calculadora Vagabunda ---")
     

@@ -39,6 +39,7 @@ def jogo_adivinhacao():
                 inicio = chute + 1
             elif feedback == 0:
                 print(f"O computador venceu com {tentativas} tentativas!")
+                break
                 
 
 jogo_adivinhacao()

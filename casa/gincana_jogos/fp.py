@@ -18,7 +18,7 @@ FONTE_PALAVRA = pygame.font.SysFont("arial", 40, bold=True)
 FONTE_INFO = pygame.font.SysFont("arial", 25)
 
 def reset_jogo():
-    # LISTA DE PALAVRAS (Tema: Países) - [100XP]
+    # LISTA DE PALAVRAS (Tema: Países) 
     palavras = ["BRASIL", "ARGENTINA", "PORTUGAL", "ALEMANHA", "JAPAO", "FRANCA"]
     palavra = random.choice(palavras).upper()
     return palavra, [], 6
@@ -32,7 +32,7 @@ def desenhar(palavra, letras_tentadas, vidas):
     pygame.draw.line(tela, PRETO, (200, 100), (400, 100), 5) # Topo
     pygame.draw.line(tela, PRETO, (400, 100), (400, 150), 5) # Corda
 
-    # Boneco baseado nas vidas - [100XP]
+    # Boneco baseado nas vidas 
     if vidas <= 5: pygame.draw.circle(tela, PRETO, (400, 190), 40, 5) # Cabeça
     if vidas <= 4: pygame.draw.line(tela, PRETO, (400, 230), (400, 400), 5) # Corpo
     if vidas <= 3: pygame.draw.line(tela, PRETO, (400, 250), (350, 320), 5) # Braço E
@@ -40,7 +40,7 @@ def desenhar(palavra, letras_tentadas, vidas):
     if vidas <= 1: pygame.draw.line(tela, PRETO, (400, 400), (350, 500), 5) # Perna E
     if vidas == 0: pygame.draw.line(tela, PRETO, (400, 400), (450, 500), 5) # Perna D
 
-    # Exibição da Palavra - [100XP]
+    # Exibição da Palavra 
     exibicao = ""
     for letra in palavra:
         if letra in letras_tentadas:

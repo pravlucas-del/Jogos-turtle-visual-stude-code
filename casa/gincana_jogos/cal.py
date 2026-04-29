@@ -3,18 +3,18 @@ from pygame import *
 # Inicialização
 init()
 tela =display.set_mode((400, 300))
-display.set_caption("Calculadora Vagabunda 300XP")
+display.set_caption("Calculadora Vagabunda")
 fonte = font.SysFont("Arial", 24)
 
 # Variáveis de estado
 memoria = 0.0
 input_texto = ""
 operador = ""
-etapa = "NUMERO_INICIAL" # NUMERO_INICIAL, OPERADOR, PROXIMO_NUMERO
+etapa = "NUMERO_INICIAL" 
 mensagem = "Digite o 1º número e Enter"
 
 def e_numero(texto):
-    # Validação manual sem try/except
+    
     temp = texto.replace('.', '', 1).replace('-', '', 1)
     return temp.isdigit() and len(texto) > 0
 
@@ -22,12 +22,12 @@ executando = True
 while executando:
     tela.fill((30, 30, 30)) # Fundo escuro
     
-    for evento in pygame.event.get():
-        if evento.type == pygame.QUIT:
+    for evento in event.get():
+        if evento.type == QUIT:
             executando = False
             
-        if evento.type == pygame.KEYDOWN:
-            if evento.key == pygame.K_RETURN:
+        if evento.type == KEYDOWN:
+            if evento.key == K_RETURN:
                 if etapa == "NUMERO_INICIAL":
                     if e_numero(input_texto):
                         memoria = float(input_texto)
@@ -57,7 +57,7 @@ while executando:
                         mensagem = f"Resultado: {memoria}. Próximo OP:"
                         input_texto = ""
             
-            elif evento.key == pygame.K_BACKSPACE:
+            elif evento.key == K_BACKSPACE:
                 input_texto = input_texto[:-1]
             else:
                 input_texto += evento.unicode
@@ -71,6 +71,5 @@ while executando:
     tela.blit(txt_instrucao, (20, 70))
     tela.blit(txt_input, (20, 120))
     
-    pygame.display.flip()
-
-pygame.quit()
+    display.flip()
+quit()
